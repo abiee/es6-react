@@ -18,7 +18,7 @@ Setup
 -----
 Clone the repository and install the dependencies.
 
-    $ git clone https://github.com/abiee/es6-rect.git my-project
+    $ git clone https://github.com/abiee/es6-react.git my-project
     $ cd my-project
     $ npm install
     $ jspm install
