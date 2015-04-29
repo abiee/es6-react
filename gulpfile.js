@@ -27,7 +27,7 @@ gulp.task('jsx', function() {
   return gulp.src('app/scripts/**/*.jsx')
     .pipe($.cached('jsx')) //Process only changed files
     .pipe($.react({es6module: true}))
-    .pipe(gulp.dest('.tmp'));
+    .pipe(gulp.dest('.tmp/scripts'));
 });
 
 // Optimize images
@@ -98,7 +98,7 @@ gulp.task('extras', function () {
 
 // Transpile ES6 source files into JavaScript
 gulp.task('transpile:app', function() {
-  return gulp.src(['app/scripts/**/*.js', '.tmp/components/**/*.js'])
+  return gulp.src(['app/scripts/**/*.{js,jsx}'])
     .pipe($.babel())
     .pipe(gulp.dest('.tmp/scripts'));
 });
@@ -106,7 +106,7 @@ gulp.task('transpile:app', function() {
 // Bundle javascripts
 gulp.task('bundle:app', function() {
   return gulp.src('')
-    .pipe($.shell('jspm bundle-sfx .tmp/scripts/app dist/scripts/app.js --skip-source-maps'));
+    .pipe($.shell('jspm bundle-sfx .tmp/scripts/app dist/scripts/app.js --minify --skip-source-maps'));
 });
 
 // Run karma for development, will watch and reload
@@ -141,8 +141,7 @@ gulp.task('serve', ['styles', 'jsx'], function () {
       baseDir: ['app', '.tmp'],
       routes: {
         '/config.js': 'config.js',
-        '/jspm_packages': 'jspm_packages',
-        '/scripts/components': '.tmp/components'
+        '/jspm_packages': 'jspm_packages'
       }
     }
   });
@@ -173,8 +172,7 @@ gulp.task('serve:dist', function() {
 // Transpile, bundle and minify app files
 gulp.task('build:app', function(callback) {
   var runSequence = require('run-sequence');
-  runSequence('jsx',
-              'transpile:app',
+  runSequence('transpile:app',
               'bundle:app',
               callback);
 });
