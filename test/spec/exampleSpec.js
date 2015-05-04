@@ -1,5 +1,5 @@
 import React from 'react';
-import HelloWorld from 'app/scripts/components/helloWorld';
+import HelloWorld from 'app/scripts/components/HelloWorld';
 
 describe('Simple test example', () => {
   'use strict';
