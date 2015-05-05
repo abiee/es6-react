@@ -15,13 +15,13 @@ System.config({
 
 System.config({
   "map": {
-    "babel": "npm:babel-core@5.1.10",
-    "babel-runtime": "npm:babel-runtime@5.1.10",
+    "babel": "npm:babel-core@5.2.15",
+    "babel-runtime": "npm:babel-runtime@5.2.15",
     "bootstrap": "github:twbs/bootstrap@3.3.4",
-    "core-js": "npm:core-js@0.8.4",
+    "core-js": "npm:core-js@0.9.6",
     "react": "npm:react@0.13.2",
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.1.2"
+      "buffer": "npm:buffer@3.2.2"
     },
     "github:jspm/nodelibs-events@0.1.0": {
       "events-browserify": "npm:events-browserify@0.0.1"
@@ -47,12 +47,12 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
-    "npm:buffer@3.1.2": {
+    "npm:buffer@3.2.2": {
       "base64-js": "npm:base64-js@0.0.8",
-      "ieee754": "npm:ieee754@1.1.4",
+      "ieee754": "npm:ieee754@1.1.5",
       "is-array": "npm:is-array@1.0.1"
     },
-    "npm:core-js@0.8.4": {
+    "npm:core-js@0.9.6": {
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:core-util-is@1.0.1": {

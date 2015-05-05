@@ -11,10 +11,10 @@ var reload = browserSync.reload;
 // Lint Javascript
 gulp.task('jshint', function () {
   return gulp.src([
-      'app/scripts/**/*.js',
-      'test/**/*.js',
-      '!app/scripts/config.js',
-      '!app/scripts/vendor/**/*.js'
+    'app/scripts/**/*.js',
+    'test/**/*.js',
+    '!app/scripts/config.js',
+    '!app/scripts/vendor/**/*.js'
   ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint())

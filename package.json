@@ -7,14 +7,14 @@
       "react": "npm:react@^0.13.2"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.0.12",
-      "babel-runtime": "npm:babel-runtime@^5.0.12",
-      "core-js": "npm:core-js@^0.8.1"
+      "babel": "npm:babel-core@^5.1.13",
+      "babel-runtime": "npm:babel-runtime@^5.1.13",
+      "core-js": "npm:core-js@^0.9.4"
     }
   },
   "devDependencies": {
     "autoprefixer-core": "^5.1.11",
-    "browser-sync": "^2.7.0",
+    "browser-sync": "^2.7.1",
     "chai": "^2.3.0",
     "chai-jquery": "^2.0.0",
     "del": "^1.1.1",
@@ -32,7 +32,7 @@
     "gulp-load-plugins": "^0.10.0",
     "gulp-minify-html": "^1.0.2",
     "gulp-notify": "^2.2.0",
-    "gulp-postcss": "^5.1.5",
+    "gulp-postcss": "^5.1.6",
     "gulp-react": "^3.0.1",
     "gulp-shell": "^0.4.1",
     "gulp-size": "^1.2.1",
