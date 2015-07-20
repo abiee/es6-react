@@ -122,7 +122,7 @@ gulp.task('test', function(callback) {
     configFile: __dirname + '/karma.conf.js',
     singleRun: true,
     browsers: ['PhantomJS2'],
-    reporters: ['dots', 'junit'],
+    reporters: ['dots'],
     junitReporter: {
       outputFile: '.tmp/test-results.xml',
     }
