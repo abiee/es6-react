@@ -21,7 +21,7 @@ System.config({
     "core-js": "npm:core-js@0.9.6",
     "react": "npm:react@0.13.3",
     "github:jspm/nodelibs-buffer@0.1.0": {
-      "buffer": "npm:buffer@3.3.0"
+      "buffer": "npm:buffer@3.3.1"
     },
     "github:jspm/nodelibs-events@0.1.1": {
       "events": "npm:events@1.0.2"
@@ -47,7 +47,18 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
     },
+    "npm:amdefine@1.0.0": {
+      "fs": "github:jspm/nodelibs-fs@0.1.2",
+      "module": "github:jspm/nodelibs-module@0.1.0",
+      "path": "github:jspm/nodelibs-path@0.1.0",
+      "process": "github:jspm/nodelibs-process@0.1.1"
+    },
     "npm:buffer@3.3.0": {
+      "base64-js": "npm:base64-js@0.0.8",
+      "ieee754": "npm:ieee754@1.1.6",
+      "is-array": "npm:is-array@1.0.1"
+    },
+    "npm:buffer@3.3.1": {
       "base64-js": "npm:base64-js@0.0.8",
       "ieee754": "npm:ieee754@1.1.6",
       "is-array": "npm:is-array@1.0.1"
@@ -99,7 +110,7 @@ System.config({
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
     "npm:source-map@0.1.31": {
-      "amdefine": "npm:amdefine@0.1.1",
+      "amdefine": "npm:amdefine@1.0.0",
       "fs": "github:jspm/nodelibs-fs@0.1.2",
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1"
