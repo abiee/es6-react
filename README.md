@@ -16,12 +16,19 @@ Setup
 -----
 Clone the repository and install the dependencies.
 
-    $ git clone https://github.com/abiee/es6-react.git my-project
-    $ cd my-project
+    $ git clone https://github.com/abiee/es6-react.git mexicoder-react-course
+    $ cd mexicoder-react-course
+    $ git checkout mexicoder-session-2
     $ npm install
     $ gulp serve
 
 Do not forget to install globally gulp if not installed yet.
+
+    $ npm install -g gulp
+
+Configure twitter credentials
+------
+You will need to configure Twitter credentials to make the project work, signin in your account and [configure a new app](https://apps.twitter.com/). Once you have the tokens provided by Twitter, edit the `twitterCredentials.json` file.
 
 Build
 ------

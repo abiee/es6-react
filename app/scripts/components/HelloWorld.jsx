@@ -1,13 +1,33 @@
 import React from 'react';
+import TextStore from '../stores/TextStore';
 
-var HelloWorld = React.createClass({
-  render: function() {
+class HelloWorld extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      text: TextStore.getText()
+    }
+  }
+
+  componentDidMount() {
+    TextStore.addChangeListener(this._change.bind(this));
+  }
+
+  componentWillUnmount() {
+    TextStore.removeChangeListener(this._change.bind(this));
+  }
+
+  render() {
     return (
       <div>
-        <h1>Hello from a react component!</h1>
+        <h1>{this.state.text}</h1>
       </div>
     );
   }
-});
+  
+  _change() {
+    this.setState({text: TextStore.getText()});
+  }
+}
 
 export default HelloWorld;

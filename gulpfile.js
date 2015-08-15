@@ -26,6 +26,9 @@ gulp.task('browserify', function () {
 
   var rebundle = function() {
     return bundler.bundle()
+      .on('error', function (err) {
+        console.log('Error: ' + err.message);
+      })
       .pipe(source('app.js'))
       .pipe(buffer())
       .pipe($.sourcemaps.init({loadMaps: true}))
@@ -50,13 +53,23 @@ gulp.task('browserify:dist', function () {
     transform: [babelify]
   });
 
-
   return bundler.bundle()
     .pipe(source('app.js'))
     .pipe(buffer())
     .pipe($.uglify())
     .on('error', $.util.log)
     .pipe(gulp.dest('dist/scripts'));
+});
+
+// Run the twitter stream server
+gulp.task('twitter:server', function () {
+  $.nodemon({
+    script: './server.js',
+    watch: [
+      'server.js',
+      'twitterCredentials.json'
+    ]
+  });
 });
 
 // Lint Javascript
@@ -157,7 +170,7 @@ gulp.task('tdd', ['test'], function(callback) {
 });
 
 // Run development server environmnet
-gulp.task('serve', ['browserify', 'styles'], function () {
+gulp.task('serve', ['browserify', 'styles', 'twitter:server'], function () {
   browserSync({
     notify: false,
     port: 9000,
@@ -184,7 +197,7 @@ gulp.task('serve', ['browserify', 'styles'], function () {
 });
 
 // Run web server on distribution files
-gulp.task('serve:dist', function() {
+gulp.task('serve:dist', ['twitter:server'], function() {
   browserSync({
     notify: false,
     port: 9000,
