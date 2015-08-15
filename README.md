@@ -6,8 +6,7 @@ What's inside
 ----------------
 Batteries included:
  - Gulp
- - jspm
- - Babel
+ - Browserify
  - Bootstrap
  - React
  - Livereload
@@ -21,7 +20,6 @@ Clone the repository and install the dependencies.
     $ git clone https://github.com/abiee/es6-react.git my-project
     $ cd my-project
     $ npm install
-    $ jspm install
     $ gulp serve
 
 Do not forget to install globally gulp if not installed yet.
@@ -36,7 +34,7 @@ It will compile the project and put the result under `dist` directory. You can r
 
     $ gulp serve:dist
 
-Testing
+Testing (Broken)
 ---------
 Two options exists to run tests, the first one is for development process and aims to practice Test Driven Development.
 

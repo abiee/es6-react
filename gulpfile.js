@@ -5,29 +5,73 @@
 var karma = require('karma').server;
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var browserify = require('browserify');
+var watchify = require('watchify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+
+// Bundle files with browserify
+gulp.task('browserify', function () {
+  // set up the browserify instance on a task basis
+  var bundler = browserify({
+    entries: 'app/scripts/app.js',
+    debug: true,
+    // defining transforms here will avoid crashing your stream
+    transform: [babelify]
+  });
+
+  bundler = watchify(bundler);
+
+  var rebundle = function() {
+    return bundler.bundle()
+      .pipe(source('app.js'))
+      .pipe(buffer())
+      .pipe($.sourcemaps.init({loadMaps: true}))
+        // Add transformation tasks to the pipeline here.
+        .on('error', $.util.log)
+      .pipe($.sourcemaps.write('./'))
+      .pipe(gulp.dest('.tmp/scripts'));
+  }
+
+  bundler.on('update', rebundle);
+
+  return rebundle();
+});
+
+// Bundle files for distribuition
+gulp.task('browserify:dist', function () {
+  // set up the browserify instance on a task basis
+  var bundler = browserify({
+    entries: 'app/scripts/app.js',
+    debug: false,
+    // defining transforms here will avoid crashing your stream
+    transform: [babelify]
+  });
+
+
+  return bundler.bundle()
+    .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe($.uglify())
+    .on('error', $.util.log)
+    .pipe(gulp.dest('dist/scripts'));
+});
 
 // Lint Javascript
 gulp.task('jshint', function () {
   return gulp.src([
     'app/scripts/**/*.js',
     'test/**/*.js',
-    '!app/scripts/config.js',
+    '!app/scripts/**/__tests__/*',
     '!app/scripts/vendor/**/*.js'
   ])
     .pipe(reload({stream: true, once: true}))
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.if(!browserSync.active, $.jshint.reporter('fail')));
-});
-
-// Compile JSX components
-gulp.task('jsx', function() {
-  return gulp.src('app/scripts/**/*.jsx')
-    .pipe($.cached('jsx')) //Process only changed files
-    .pipe($.react({es6module: true}))
-    .pipe(gulp.dest('.tmp/scripts'));
 });
 
 // Optimize images
@@ -44,8 +88,7 @@ gulp.task('images', function () {
 // Copy web fonts to dist
 gulp.task('fonts', function () {
   return gulp.src([
-    'app/{,styles/}fonts/**/*',
-    'jspm_packages/github/twbs/bootstrap@*/fonts/**/*'
+    'app/{,styles/}fonts/**/*'
   ])
     .pipe($.flatten())
     .pipe(gulp.dest('dist/fonts'));
@@ -96,19 +139,6 @@ gulp.task('extras', function () {
   }).pipe(gulp.dest('dist'));
 });
 
-// Transpile ES6 source files into JavaScript
-gulp.task('transpile:app', function() {
-  return gulp.src(['app/scripts/**/*.{js,jsx}'])
-    .pipe($.babel())
-    .pipe(gulp.dest('.tmp/scripts'));
-});
-
-// Bundle javascripts
-gulp.task('bundle:app', function() {
-  return gulp.src('')
-    .pipe($.shell('jspm bundle-sfx .tmp/scripts/app dist/scripts/app.js --minify --skip-source-maps'));
-});
-
 // Run karma for development, will watch and reload
 gulp.task('tdd', function(callback) {
   karma.start({
@@ -130,7 +160,7 @@ gulp.task('test', function(callback) {
 });
 
 // Run development server environmnet
-gulp.task('serve', ['styles', 'jsx'], function () {
+gulp.task('serve', ['browserify', 'styles'], function () {
   browserSync({
     notify: false,
     port: 9000,
@@ -138,10 +168,9 @@ gulp.task('serve', ['styles', 'jsx'], function () {
       port: 9001
     },
     server: {
-      baseDir: ['app', '.tmp'],
+      baseDir: ['.tmp', 'app'],
       routes: {
-        '/config.js': 'config.js',
-        '/jspm_packages': 'jspm_packages'
+        '/node_modules': 'node_modules'
       }
     }
   });
@@ -155,7 +184,6 @@ gulp.task('serve', ['styles', 'jsx'], function () {
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.css', ['styles']);
-  gulp.watch('app/scripts/**/*.jsx', ['jsx']);
 });
 
 // Run web server on distribution files
@@ -169,16 +197,8 @@ gulp.task('serve:dist', function() {
   });
 });
 
-// Transpile, bundle and minify app files
-gulp.task('build:app', function(callback) {
-  var runSequence = require('run-sequence');
-  runSequence('transpile:app',
-              'bundle:app',
-              callback);
-});
-
 // Build the project for distribution
-gulp.task('build', ['jshint', 'build:app', 'html', 'images', 'fonts', 'extras'], function () {
+gulp.task('build', ['jshint', 'browserify:dist', 'html', 'images', 'fonts', 'extras'], function () {
   var size = $.size({title: 'build', gzip: true });
   return gulp.src('dist/**/*')
     .pipe(size)
