@@ -2,7 +2,7 @@ var Twitter = require('Twitter');
 var credentials = require('./twitterCredentials');
 
 var SERVER_PORT = 8080;
-var TWITTER_SEARCH = 'javascript';
+var TWITTER_SEARCH = 'HoyViernesNoSalgoPorQue';
 var client = new Twitter(credentials);
 
 client.stream('statuses/filter', {track: TWITTER_SEARCH}, function(stream) {

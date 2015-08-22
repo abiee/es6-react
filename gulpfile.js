@@ -178,7 +178,7 @@ gulp.task('serve', ['browserify', 'styles', 'twitter:server'], function () {
       port: 9001
     },
     server: {
-      baseDir: ['.tmp', 'app'],
+      baseDir: ['.tmp', 'app', 'node_modules/bootstrap/dist'],
       routes: {
         '/node_modules': 'node_modules'
       }

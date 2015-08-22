@@ -1,1 +1,26 @@
-/* Put your css here */
+.tweet {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  border: 1px solid #ecf0f1;
+  border-radius: 5px;
+}
+
+.tweet:hover {
+  border-color: #3be6c4;
+  cursor: pointer;
+}
+
+.stream-info {
+  margin-bottom: 45px;
+}
+
+.empty-stream {
+  text-align: center;
+}
+
+.empty-stream .glyphicon {
+  font-size: 350px;
+  margin-bottom: 35px;
+}

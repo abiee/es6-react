@@ -1,6 +1,8 @@
 import React from 'react';
-import Tweet from './Tweet.jsx';
 import TweetStore from '../stores/TweetStore';
+import StreamInfo from './StreamInfo.jsx';
+import EmptyStream from './EmptyStream.jsx';
+import Tweet from './Tweet.jsx';
 
 class TweetStream extends React.Component {
   constructor() {
@@ -22,11 +24,16 @@ class TweetStream extends React.Component {
     var tweetsComponent = this.state.tweets.map(tweet => {
       return <Tweet text={tweet.text}
                     author={tweet.user.screen_name}
-                    avatar={tweet.user.profile_image} />
+                    avatar={tweet.user.profile_image} />;
     });
 
+    if (tweetsComponent.length === 0) {
+      tweetsComponent = <EmptyStream />;
+    }
+
     return (
-      <div>
+      <div className="col-xs-12 col-lg-offset-3 col-lg-6">
+        <StreamInfo />
         {tweetsComponent}
       </div>
     );
