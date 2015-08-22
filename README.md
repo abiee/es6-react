@@ -10,8 +10,7 @@ Batteries included:
  - Bootstrap
  - React
  - Livereload
- - Karma
- - Mocha-Chai-Sinon
+ - Jest
 
 Setup
 -----
@@ -34,7 +33,7 @@ It will compile the project and put the result under `dist` directory. You can r
 
     $ gulp serve:dist
 
-Testing (Broken)
+Testing
 ---------
 Two options exists to run tests, the first one is for development process and aims to practice Test Driven Development.
 
