@@ -2,7 +2,6 @@
 /* jshint node:true */
 'use strict';
 
-var karma = require('karma').server;
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserify = require('browserify');
@@ -139,24 +138,22 @@ gulp.task('extras', function () {
   }).pipe(gulp.dest('dist'));
 });
 
-// Run karma for development, will watch and reload
-gulp.task('tdd', function(callback) {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js'
-  }, callback);
-});
-
 // Run tests and report for ci
 gulp.task('test', function(callback) {
-  karma.start({
-    configFile: __dirname + '/karma.conf.js',
-    singleRun: true,
-    browsers: ['PhantomJS2'],
-    reporters: ['dots'],
-    junitReporter: {
-      outputFile: '.tmp/test-results.xml',
-    }
-  }, callback);
+  return gulp.src('app/scripts/**/__tests__')
+    .pipe($.jest({
+      scriptPreprocessor: __dirname + '/node_modules/babel-jest',
+      unmockedModulePathPatterns: [
+        __dirname + '/node_modules/react',
+        __dirname + '/node_modules/react-tools'
+      ],
+      moduleFileExtensions: ['js', 'json', 'jsx']
+    }));
+});
+
+// Run test in tdd mode
+gulp.task('tdd', ['test'], function(callback) {
+  gulp.watch('app/scripts/**/*.js', ['test']);
 });
 
 // Run development server environmnet
