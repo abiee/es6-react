@@ -26,6 +26,7 @@ gulp.task('browserify', function () {
 
   var rebundle = function() {
     return bundler.bundle()
+      .on('error', $.util.log)
       .pipe(source('app.js'))
       .pipe(buffer())
       .pipe($.sourcemaps.init({loadMaps: true}))
