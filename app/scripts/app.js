@@ -1,7 +1,18 @@
-import React from 'react';
-import HelloWorld from './components/HelloWorld.jsx';
+var React = require('react');
+var HelloWorld = require('./components/HelloWorld.jsx');
+var AppDispatcher = require('./dispatcher/AppDispatcher');
+var ExampleStore = require('./store/ExampleStore');
 
 React.render(
-  React.createElement(HelloWorld, null),
+  <HelloWorld />,
   document.getElementById('main')
 );
+
+ExampleStore.addChangeListener(() => {
+  console.log(ExampleStore.getMessage());
+});
+
+AppDispatcher.dispatch({
+  action: 'SET_INVOICE',
+  invoice: {}
+});

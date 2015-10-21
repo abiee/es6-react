@@ -1,6 +1,6 @@
 jest.dontMock('../HelloWorld.jsx');
 
-import React from 'react/addons';
+var React = require('react/addons');
 
 var HelloWorld = require('../HelloWorld.jsx');
 var TestUtils = React.addons.TestUtils;
