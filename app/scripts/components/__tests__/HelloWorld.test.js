@@ -1,9 +1,10 @@
 jest.dontMock('../HelloWorld.jsx');
 
-import React from 'react/addons';
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
+var ReactDOM = require('react-dom');
 
 var HelloWorld = require('../HelloWorld.jsx');
-var TestUtils = React.addons.TestUtils;
 
 describe('HelloWorld component', function() {
   it('should display the right message', function() {
@@ -11,7 +12,7 @@ describe('HelloWorld component', function() {
       <HelloWorld />
     );
 
-    var message = helloWorld.getDOMNode().textContent
+    var message = ReactDOM.findDOMNode(helloWorld).textContent;
     expect(message).toContain('Hello from a react');
   });
 });

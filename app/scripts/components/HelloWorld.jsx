@@ -1,4 +1,4 @@
-import React from 'react';
+var React = require('react');
 
 var HelloWorld = React.createClass({
   render: function() {
@@ -10,4 +10,5 @@ var HelloWorld = React.createClass({
   }
 });
 
-export default HelloWorld;
+module.exports = HelloWorld;
+

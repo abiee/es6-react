@@ -99,7 +99,7 @@ gulp.task('styles', function () {
   return gulp.src('app/styles/main.css')
     .pipe($.sourcemaps.init())
     .pipe($.postcss([
-      require('autoprefixer-core')({browsers: ['last 1 version']})
+      require('autoprefixer')({browsers: ['last 1 version']})
     ]))
     .pipe($.sourcemaps.write())
     .pipe(gulp.dest('.tmp/styles'))

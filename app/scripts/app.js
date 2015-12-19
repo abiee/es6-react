@@ -1,7 +1,8 @@
-import React from 'react';
-import HelloWorld from './components/HelloWorld.jsx';
+var React = require('react');
+var ReactDOM = require('react-dom');
+var HelloWorld = require('./components/HelloWorld.jsx');
 
-React.render(
+ReactDOM.render(
   React.createElement(HelloWorld, null),
   document.getElementById('main')
 );
