@@ -1,14 +1,14 @@
 ES6 React project
-======================
-Blank porject made with React and ES6, you can use it to bootstrap your projects. Please note that this project does not include flux architecture or any libs about it, this is good because you can install your favorite libs.
+=================
+Empty project made with React and ES6, you can use it to bootstrap your own projects.
 
 What's inside
-----------------
+-------------
 Batteries included:
- - Gulp
- - Browserify
- - Bootstrap
  - React
+ - Redux
+ - Bootstrap
+ - Webpack
  - Livereload
  - Jest
 
@@ -19,32 +19,24 @@ Clone the repository and install the dependencies.
     $ git clone https://github.com/abiee/es6-react.git my-project
     $ cd my-project
     $ npm install
-    $ gulp serve
-
-Do not forget to install globally gulp if not installed yet.
+    $ npm start
 
 Build
 ------
 If you want to build the project run.
 
-    $ gulp build
+    $ npm run build
 
-It will compile the project and put the result under `dist` directory. You can run the compiled project also.
-
-    $ gulp serve:dist
+It will compile the project and put the result under `dist` directory.
 
 Testing
----------
-You have two options test the project. The first one is for development process and encorages to practice Test Driven Development or BDD.
+-------
+To run the project tests use the standard `test` command.
 
-    $ gulp tdd
-
-The other option is to run tests just once.
-    
-    $ gulp test
+    $ npm test
 
 Contribution
----------------
+------------
 If you have ideas or find an error feel free to submit a PR.
 
 Licence

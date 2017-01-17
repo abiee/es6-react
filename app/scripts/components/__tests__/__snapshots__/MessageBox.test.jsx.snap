@@ -1,0 +1,10 @@
+exports[`HelloWorld component should display the right message 1`] = `
+<div>
+  <h4>
+    Example title
+  </h4>
+  <p>
+    Hello world!
+  </p>
+</div>
+`;
