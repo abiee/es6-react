@@ -16,7 +16,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
       title: 'ES6 React boilplate',
       template: './index.ejs',
@@ -26,27 +26,49 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loader: 'babel',
+      use: 'babel-loader',
       include: [
         __dirname + '/app/scripts/'
       ]
     }, {
       test: /\.css$/,
-      loader: 'style!css?importLoaders=1!postcss?sourceMap=inline',
+      use: [{
+        loader: 'style-loader'
+      }, {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 1
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap: 'inline'
+        }
+      }],
       include: [
         __dirname + '/app/styles/',
         __dirname + '/node_modules/bootstrap/'
       ]
     }, {
       test: /\.(png|jpg|svg)$/,
-      loader: 'url?limit=8192&name=images/[name].[ext]',
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 8192,
+          name: 'images/[name].[ext]'
+        }
+      },
       include: [
         __dirname + 'app/images/',
-      ],
+      ]
     }, {
       test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-      loader: 'file-loader?name=fonts/[name].[ext]'
+      use: {
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]'
+        }
+      }
     }]
-  },
-  postcss: [ ]
+  }
 };
